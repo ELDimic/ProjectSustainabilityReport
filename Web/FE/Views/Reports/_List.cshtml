@@ -1,0 +1,19 @@
+@model IEnumerable<Web.Services.ReportItem>
+    @if (!Model.Any()){
+    <p>Nessun documento trovato nel periodo selezionato.</p>
+}else{
+    <table>
+        <thead><tr><th>Anno</th><th>Nome</th><th>Ultima Modifica</th><th>Dimensione</th><th></th></tr></thead>
+        <tbody>
+            @foreach (var r in Model){
+            <tr>
+                <td>@(r.Year ?? "N/D")</td>
+                <td>@r.Name</td>
+                <td>@r.LastModified?.LocalDateTime.ToString("d")</td>
+                <td>@r.Size</td>
+                <td><a href="@r.DownloadUrl">Scarica</a></td>
+            </tr>
+      }
+        </tbody>
+    </table>
+}
